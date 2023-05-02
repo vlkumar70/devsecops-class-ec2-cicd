@@ -33,4 +33,7 @@ variable "vpc_id" {
   description = "EC2 instance keypair"
 }
 
-
+variable "security_groups_ids" {
+  type        = list(any)
+  description = "The SGs to use"
+}
