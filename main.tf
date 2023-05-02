@@ -14,3 +14,9 @@ terraform {
     }
   }
 }
+
+# terraform state backe
+terraform {
+  backend "s3" {
+  }
+}
