@@ -14,5 +14,6 @@ terraform fmt --recursive
 terraform validate
 
 ## Terraform plan
-terraform plan -destroy -var-file="tfvars/local.tfvars"
-terraform destroy -var-file="tfvars/local.tfvars" -auto-approve
+terraform plan -destroy -out=destroy.plan -var-file="tfvars/local.tfvars"
+#terraform destroy -var-file="tfvars/local.tfvars" -auto-approve
+terraform apply "destroy.plan"

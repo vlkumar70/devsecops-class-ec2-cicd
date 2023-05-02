@@ -1,7 +1,0 @@
-region               = "us-east-1"
-availability_zone_1a = "us-east-1a"
-vpc_id               = "vpc-07ad16359d93147d1"
-public_subnet_1a     = "subnet-03273d2b30d7b89ee"
-instance_type        = "t2.micro"
-instance_name        = "ubuntu-jenkins-terraform"
-instance_keypair     = "april2023"

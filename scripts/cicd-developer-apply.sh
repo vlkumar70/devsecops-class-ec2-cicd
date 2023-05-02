@@ -14,5 +14,5 @@ terraform fmt --recursive
 terraform validate
 
 ## Terraform plan
-terraform plan -var-file="tfvars/local.tfvars"
-terraform apply -var-file="tfvars/local.tfvars" -auto-approve
+terraform plan -out=tf.plan -var-file="tfvars/local.tfvars"
+terraform apply "tf.plan" 
