@@ -7,7 +7,6 @@ This project will build the VPC with 9 subnets and create EC2 in public subnet w
 ```
 - terraform v0.13+
 - install jq
-- chmod 755 whatismyip.sh
 ```
 ## Precheck
 ```
