@@ -43,6 +43,3 @@ This project will build the VPC with 9 subnets and create EC2 in public subnet w
 * locals
 * Explicit and implicit dependencies 
 * Provisioners
-* dynamic block
-* data types
-* terraform state
