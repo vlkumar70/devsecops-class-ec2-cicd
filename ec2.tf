@@ -22,7 +22,7 @@ data "external" "whatismyip" {
 }
 
 resource "aws_security_group" "allow_ssh" {
-  name        = "devsecops-public-sg"
+  name        = "devsecops-cicd-public-sg"
   description = "Allow SSH inbound traffic"
   vpc_id      = var.vpc_id
 
