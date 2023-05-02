@@ -40,6 +40,4 @@ This project will build the VPC with 9 subnets and create EC2 in public subnet w
 - from browser (https://<publicip>:80)
 ```
 * Input/output variale 
-* locals
-* Explicit and implicit dependencies 
-* Provisioners
+
