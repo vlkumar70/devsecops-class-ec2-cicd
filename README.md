@@ -8,6 +8,10 @@ This project will build the VPC with 9 subnets and create EC2 in public subnet w
 - terraform v0.13+
 - install jq
 ```
+
+## Github branching strategy
+![Image Description](images/git-branching-strategy.jpg) <br>
+
 ## OIDC setup
 ```
 - Here I am using GitHub OIDC connectivity. This setup will give shorterm creentials using (Amazon STS)
