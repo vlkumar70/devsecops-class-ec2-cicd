@@ -8,15 +8,22 @@ This project will build the VPC with 9 subnets and create EC2 in public subnet w
 - terraform v0.13+
 - install jq
 ```
+## OIDC setup
+```
+- Here I am using GitHub OIDC connectivity. This setup will give shorterm creentials using (Amazon STS)
+- We need to create one OIDC roles for one repo.. its one-to-one relation
+- First you need to have github branch. Make a note of the branch Ex: DevOpsAirflow/devsecops-class-ec2-cicd
+- Login to AWS Console
+  * go to IAM
+  * go to identify provider (give github provider)
+  * Add oidc role
+  * you need to update this OIDC role in your .github/workflow/*.sh files
+```
+
 ## Precheck
 ```
 - Make the variables changes to tfvars/*.tfvars files
 - Make the backend config changes in backend-config/*.tfconfig files
-- validate the connection (aws sts get-caller-identity)
-- if there is no connectivity
-- set the profile (export AWS_PROFILE=<profile>)
-- set the default region (export AWS_DEFAULT_REGION=us-east-1)
-
 ```
 ## Commands
 ```
@@ -40,7 +47,7 @@ This project will build the VPC with 9 subnets and create EC2 in public subnet w
   * select base branch and compare branch correctly
   * in this case.. base: developer-destroy compare: developer-apply
   * put some comment
-  * Raise the PR .. someone will reviw and approve
+  * Raise the PR .. someone will review and approve
   * Once its approved you can go ahead and merge with developer-destroy
 - this will trigger .github/workflows/cicd-local-destroy.yml
 - go to github/Actions and watch the workflow run
