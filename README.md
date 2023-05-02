@@ -53,4 +53,3 @@ This project will build the VPC with 9 subnets and create EC2 in public subnet w
   * same process is above
 - you are done with CICD pipeline
 
-
