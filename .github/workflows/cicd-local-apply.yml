@@ -1,0 +1,87 @@
+name: CI-terraform-local-apply
+'on':
+  push:
+    branches:
+      - developer-apply
+
+env:
+  AWS_REGION : "us-east-1"
+
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: write # This is required for actions/checkout
+  pull-requests: write
+  statuses: write
+  repository-projects: read
+
+jobs:
+  terraform-local-apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v3
+        with:
+          ref: developer-apply
+          fetch-depth: '1'
+
+      - name: Install terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.4.6
+
+      - name: Print dependencies
+        run: |
+          ls -al
+          ./scripts/ci-print-dependencies.sh
+
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::479379427248:role/bastion-github-oidc-role
+          role-session-name: tf-bastion
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Print assumed role
+        run: aws sts get-caller-identity
+
+    #   # TFLint - Terraform Check
+    #   - uses: actions/cache@v3
+    #     name: Cache plugin dir
+    #     with:
+    #       path: ~/.tflint.d/plugins
+    #       key: ${{ matrix.os }}-tflint-${{ hashFiles('.tflint.hcl') }}
+
+    #   - uses: terraform-linters/setup-tflint@v3
+    #     name: Setup TFLint
+    #     with:
+    #       github_token: ${{ secrets.CI_GITHUB_TOKEN }}
+      
+    # # Print TFLint version
+    #   - name: Show version
+    #     run: tflint --version
+        
+    # # Install plugins
+    #   - name: Init TFLint
+    #     run: tflint --init
+        
+    # # Run tflint command in each directory recursively # use --force if you want to continue with workflow although errors are there
+    #   - name: Run TFLint
+    #     run: |
+    #       ls -al
+    #       tflint -f compact --recursive 
+      
+      # - name: Run Tfsec
+      #   uses: aquasecurity/tfsec-action@v1.0.0
+
+      # - name: Test with Checkov
+      #   id: checkov
+      #   uses: bridgecrewio/checkov-action@master
+      #   with:
+      #     directory: ./
+      #     framework: terraform
+
+      - name: CI terraform init plan apply Command
+        timeout-minutes: 20
+        run: |
+          ./scripts/cicd-developer-apply.sh

@@ -1,0 +1,53 @@
+name: 'CI-terraform-staging-build'
+
+on:
+  push:
+    branches: 
+      - staging
+
+env:
+  AWS_REGION : "us-east-1"
+
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: write # This is required for actions/checkout
+  pull-requests: write
+  statuses: write
+  repository-projects: read
+      
+jobs:
+  terraform-staging-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30 # default 360
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v3
+        with:
+          ref: development
+          fetch-depth: '1'
+
+      - name: Install terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.4.6
+
+      - name: Print dependencies
+        run: |
+          ls -al
+          ./scripts/ci-print-dependencies.sh
+
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::254082520670:role/stageadmin-bastion-github-oidc-role
+          role-session-name: tf-bastion
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Print assumed role
+        run: aws sts get-caller-identity
+
+      - name: CI terraform init plan apply Command
+        timeout-minutes: 20
+        run: |
+          ./scripts/cicd-staging.sh
+
