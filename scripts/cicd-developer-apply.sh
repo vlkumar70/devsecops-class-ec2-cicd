@@ -15,4 +15,4 @@ terraform validate
 
 ## Terraform plan
 terraform plan -out=tf.plan -var-file="tfvars/local.tfvars"
-terraform apply tf.plan -auto-approve
+terraform apply "tf.plan" -auto-approve
