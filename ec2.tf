@@ -20,6 +20,7 @@ terraform {
   backend "s3" {
   }
 }
+
 # This function will get the latest ami id from AMI list
 data "aws_ami" "ubuntu" {
   most_recent = true
