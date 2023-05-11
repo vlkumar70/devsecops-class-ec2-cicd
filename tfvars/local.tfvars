@@ -1,7 +1,7 @@
 region               = "us-east-1"
 availability_zone_1a = "us-east-1a"
 vpc_id               = "vpc-0024e63bf3727f754"
-public_subnet_1a     = "subnet-003d573d46408608e"
+public_subnet_1a     = "subnet-023fff8aac3c73a67"
 instance_keypair     = "new_key"
 instance_type        = "t2.large"
 instance_name        = "ubuntu-jenkins-terraform"
