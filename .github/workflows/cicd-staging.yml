@@ -39,7 +39,7 @@ jobs:
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: arn:aws:iam::254082520670:role/stageadmin-bastion-github-oidc-role
+          role-to-assume: arn:aws:iam::273055904533:role/devsecops-class-ec2-cicd-oidc-role
           role-session-name: tf-bastion
           aws-region: ${{ env.AWS_REGION }}
 
